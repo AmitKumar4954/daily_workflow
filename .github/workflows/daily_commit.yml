@@ -12,18 +12,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        
+
       - name: amit.kumar@gramener.com - Update a file
         run: |
           # Create or modify a file in the repository
           echo "This file was updated by the GitHub Actions workflow at $(date)" > update.txt
           
-          # Configure git with your name and email for the commit
-          git config --global user.name "Your Name"
-          git config --global user.email "amit.kumar@gramener.com"
+          # Configure git with user details
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Add, commit, and push the changes
+          # Add, commit, and push the changes using GITHUB_TOKEN for authentication
           git add update.txt
           git commit -m "Daily update commit"
-          git push
+          git push https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} --token ${{ secrets.GITHUB_TOKEN }}
 
