@@ -22,8 +22,9 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Add, commit, and push the changes using GITHUB_TOKEN for authentication
+          # Add, commit, and push the changes using the GITHUB_TOKEN for authentication
           git add update.txt
           git commit -m "Daily update commit"
-          git push https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} --token ${{ secrets.GITHUB_TOKEN }}
-
+          
+          # Correct git push with the token as part of the URL
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
